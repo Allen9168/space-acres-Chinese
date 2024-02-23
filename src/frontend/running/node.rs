@@ -80,7 +80,7 @@ impl Component for NodeView {
                         set_spacing: 10,
                         #[watch]
                         set_tooltip: &format!(
-                            "Free disk space: {} remaining",
+                            "可用磁盘空间：剩余 {}",
                             model.free_disk_space
                                 .map(|bytes| bytes.to_string_as(true))
                                 .unwrap_or_default()
@@ -116,7 +116,7 @@ impl Component for NodeView {
                     gtk::Label {
                         #[watch]
                         set_label: &format!(
-                            "Connecting to the network, best block #{}",
+                            "正在连接网络，最佳区块 #{}",
                             model.best_block_number
                         ),
                     }
@@ -134,12 +134,12 @@ impl Component for NodeView {
                             #[watch]
                             set_label: &{
                                 let kind = match kind {
-                                    SyncKind::Dsn => "Syncing from DSN",
-                                    SyncKind::Regular => "Regular sync",
+                                    SyncKind::Dsn => "从DSN同步",
+                                    SyncKind::Regular => "常规同步",
                                 };
                                 let sync_speed = if model.block_import_time.get_num_samples() > 0 {
                                      let mut sync_speed = format!(
-                                        ", {:.2} blocks/s",
+                                        "，{:.2} 区块/秒",
                                         1.0 / model.block_import_time.get_average().as_secs_f32(),
                                     );
 
@@ -147,17 +147,17 @@ impl Component for NodeView {
                                         let time_remaining = (target - model.best_block_number) * model.block_import_time.get_average();
                                         if time_remaining > Duration::from_secs(3600) {
                                             sync_speed += &format!(
-                                                " (~{:.2} hours remaining)",
+                                                " （剩余约 {:.2} 小时）",
                                                 time_remaining.as_secs_f32() / 3600.0
                                             );
                                         } else if time_remaining > Duration::from_secs(60) {
                                             sync_speed += &format!(
-                                                " (~{:.2} minutes remaining)",
+                                                " （剩余约 {:.2} 分钟）",
                                                 time_remaining.as_secs_f32() / 60.0
                                             );
                                         } else {
                                             sync_speed += &format!(
-                                                " (~{:.2} seconds remaining)",
+                                                " （剩余约 {:.2} 秒）",
                                                 time_remaining.as_secs_f32()
                                             );
                                         }
@@ -191,7 +191,7 @@ impl Component for NodeView {
                 SyncState::Idle => gtk::Box {
                     gtk::Label {
                         #[watch]
-                        set_label: &format!("Synced, best block #{}", model.best_block_number),
+                        set_label: &format!("已同步，最佳区块 #{}", model.best_block_number),
                     }
                 },
             },
@@ -247,7 +247,7 @@ impl NodeView {
             } => {
                 self.best_block_number = best_block_number;
                 self.chain_name = format!(
-                    "{} consensus node",
+                    "{} 共识节点",
                     chain_info
                         .chain_name
                         .strip_prefix("Subspace ")
@@ -339,11 +339,11 @@ impl NodeView {
                             }
                         }
                         Ok(Err(error)) => {
-                            error!(%error, "Failed to check free disk space");
+                            error!(%error, "检查剩余磁盘空间失败");
                             break;
                         }
                         Err(error) => {
-                            error!(%error, "Free disk space task panicked");
+                            error!(%error, "剩余磁盘空间任务出现异常");
                             break;
                         }
                     }

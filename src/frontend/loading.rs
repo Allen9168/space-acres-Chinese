@@ -63,54 +63,55 @@ impl LoadingView {
         match input {
             LoadingInput::BackendLoading(step) => {
                 self.message = match step {
-                    LoadingStep::LoadingConfiguration => "Loading configuration...".to_string(),
-                    LoadingStep::ReadingConfiguration => "Reading configuration...".to_string(),
+                    LoadingStep::LoadingConfiguration => "正在加载配置...".to_string(),
+                    LoadingStep::ReadingConfiguration => "正在读取配置...".to_string(),
                     LoadingStep::ConfigurationReadSuccessfully { .. } => {
-                        "Configuration read successfully".to_string()
-                    }
-                    LoadingStep::CheckingConfiguration => "Checking configuration...".to_string(),
-                    LoadingStep::ConfigurationIsValid => "Configuration is valid".to_string(),
+                        "配置读取成功".to_string()
+                    },
+                    LoadingStep::CheckingConfiguration => "正在检查配置...".to_string(),
+                    LoadingStep::ConfigurationIsValid => "配置有效".to_string(),
                     LoadingStep::DecodingChainSpecification => {
-                        "Decoding chain specification...".to_string()
-                    }
+                        "正在解码链规范...".to_string()
+                    },
                     LoadingStep::DecodedChainSpecificationSuccessfully => {
-                        "Decoded chain specification successfully".to_string()
-                    }
-                    LoadingStep::CheckingNodePath => "Checking node path...".to_string(),
-                    LoadingStep::CreatingNodePath => "Creating node path...".to_string(),
-                    LoadingStep::NodePathReady => "Node path ready".to_string(),
+                        "链规范解码成功".to_string()
+                    },
+                    LoadingStep::CheckingNodePath => "正在检查节点路径...".to_string(),
+                    LoadingStep::CreatingNodePath => "正在创建节点路径...".to_string(),
+                    LoadingStep::NodePathReady => "节点路径就绪".to_string(),
                     LoadingStep::PreparingNetworkingStack => {
-                        "Preparing networking stack...".to_string()
-                    }
-                    LoadingStep::ReadingNetworkKeypair => "Reading network keypair...".to_string(),
+                        "正在准备网络堆栈...".to_string()
+                    },
+                    LoadingStep::ReadingNetworkKeypair => "正在读取网络密钥对...".to_string(),
                     LoadingStep::GeneratingNetworkKeypair => {
-                        "Generating network keypair...".to_string()
-                    }
+                        "正在生成网络密钥对...".to_string()
+                    },
                     LoadingStep::WritingNetworkKeypair => {
-                        "Writing network keypair to disk...".to_string()
-                    }
+                        "正在将网络密钥对写入磁盘...".to_string()
+                    },
                     LoadingStep::InstantiatingNetworkingStack => {
-                        "Instantiating networking stack...".to_string()
-                    }
+                        "正在实例化网络堆栈...".to_string()
+                    },
                     LoadingStep::NetworkingStackCreatedSuccessfully => {
-                        "Networking stack created successfully".to_string()
-                    }
-                    LoadingStep::CreatingConsensusNode => "Creating consensus node...".to_string(),
+                        "网络堆栈创建成功".to_string()
+                    },
+                    LoadingStep::CreatingConsensusNode => "正在创建共识节点...".to_string(),
                     LoadingStep::ConsensusNodeCreatedSuccessfully => {
-                        "Consensus node created successfully".to_string()
-                    }
-                    LoadingStep::CreatingFarmer => "Creating farmer...".to_string(),
+                        "共识节点创建成功".to_string()
+                    },
+                    LoadingStep::CreatingFarmer => "正在创建农民节点...".to_string(),
                     LoadingStep::FarmerCreatedSuccessfully => {
-                        "Farmer created successfully".to_string()
-                    }
+                        "农民节点创建成功".to_string()
+                    },
                     LoadingStep::WipingFarm { farm_index, path } => {
-                        format!("Wiping farm {farm_index} at {}...", path.display())
-                    }
+                        format!("正在清理农场 {farm_index} 位于 {}...", path.display())
+                    },
                     LoadingStep::WipingNode { path } => {
-                        format!("Wiping node at {}...", path.display())
+                        format!("正在清理节点位于 {}...", path.display())
                     }
                 };
             }
         }
     }
 }
+

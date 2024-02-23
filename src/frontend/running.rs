@@ -78,7 +78,7 @@ impl Component for RunningView {
 
                         gtk::LinkButton {
                             remove_css_class: "link",
-                            set_tooltip: "Total account balance and coins farmed since application started, click to see details in Astral",
+                            set_tooltip: "总账户余额及自应用启动以来的挖矿收益，点击查看Astral中的详情",
                             #[watch]
                             set_uri: &model.farmer_state.reward_address_url,
                             set_use_underline: false,
@@ -200,8 +200,7 @@ impl RunningView {
                 {
                     self.farms.insert(
                         u8::try_from(farm_index).expect(
-                            "More than 256 plots are not supported, this is checked on \
-                            backend; qed",
+                            "不支持超过256个农场（或绘图），这一点在后端已进行检查；",
                         ),
                         FarmWidgetInit {
                             farm,
