@@ -54,16 +54,8 @@ Space Acres是一个针对[Subspace Network](https://subspace.network/)农业的
 
 应用支持最少配置，并且目前还不支持操作员功能（至少目前还不支持）。
 
-## 如何构建
+## 中文电报
 
-要构建此应用，您需要安装[Subspace](https://github.com/subspace/subspace)和[GTK4](https://github.com/gtk-rs/gtk4-rs)所需的依赖项，详情请参阅它们的文档，否则`cargo run`将帮助您开始。
-
-## 贡献
-欢迎和感谢各种形式的贡献。
-
-## 许可证
-零条款BSD
-
-https://opensource.org/licenses/0BSD
+https://t.me/subspacecn
 
 https://tldrlegal.com/license/bsd-0-clause-license
