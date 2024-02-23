@@ -1,67 +1,63 @@
-# Space Acres
+# Space Acres（太空农场）
 
-[![Latest Release](https://img.shields.io/github/v/release/subspace/space-acres?display_name=tag&style=flat-square)](https://github.com/subspace/space-acres/releases)
-[![Downloads Latest](https://img.shields.io/github/downloads/subspace/space-acres/latest/total?style=flat-square)](https://github.com/subspace/space-acres/releases/latest)
+[![最新发布](https://img.shields.io/github/v/release/subspace/space-acres?display_name=tag&style=flat-square)](https://github.com/subspace/space-acres/releases)
+[![最新下载](https://img.shields.io/github/downloads/subspace/space-acres/latest/total?style=flat-square)](https://github.com/subspace/space-acres/releases/latest)
 [![Rust](https://img.shields.io/github/actions/workflow/status/subspace/space-acres/rust.yml?branch=main)](https://github.com/subspace/space-acres/actions/workflows/rust.yaml)
 
-Space Acres is an opinionated GUI application for farming on [Subspace Network](https://subspace.network/).
+Space Acres是一个针对[Subspace Network](https://subspace.network/)农业的自定GUI应用程序。
 
-## Current status
+## 当前状态
 
-Current status of the project is Alpha.
+项目当前处于Alpha阶段。
 
-This means that while it should generally work, expect things to not work sometimes, break in unexpected ways and error
-handling to be lacking.
+这意味着虽然它通常应该工作，但期望有时候会出现问题，以意想不到的方式出错，错误处理可能会缺失。
 
-Current version supports Gemini 3h chain only and doesn't allow to select anything else. It supports upgrading existing
-installations from 3g.
+当前版本仅支持Gemini 3h链，并且不允许选择其他任何选项。它支持从3g版本升级现有安装。
 
-## Features
+## 功能
 
-Current features:
-* Configuration (reward address, node location, multiple farms, P2P ports)
-* Node sync with displayed progress, speed and ETA
-* Farmer plotting/farming piece cache/plotting/replotting progress display and speed calculation
-* Farmer auditing/proving performance indicators
-* Farmer sector state visualization
+当前功能：
+* 配置（奖励地址，节点位置，多个农场，P2P端口）
+* 节点同步与显示进度、速度和预计到达时间（ETA）
+* 农民绘图/农业作物缓存/绘图/重新绘图进度显示和速度计算
+* 农民审计/证明性能指标
+* 农民扇区状态可视化
 
-Upcoming features/capabilities: see open issues, also consider contributing if something is missing!
+即将推出的功能/能力：请查看开放问题，如果缺少某些内容，也请考虑贡献！
 
-## Installation
+## 安装
 
-See [docs/INSTALLATION.md](docs/INSTALLATION.md) for details
+详细安装说明请见[docs/INSTALLATION.md](docs/INSTALLATION.md)
 
-## Project structure
+## 项目结构
 
-The project at high level is structured in a few large modules:
-* `backend` handles all the backend functionality
-  * `config` contains configuration data structure with ability to read, write and validate it
-  * `farmer` contains farmer implementation with a wrapper data structure that abstracts away its internals
-  * `networking` contains networking stack that is shared between `farmer` and `node` with a wrapper data structure that abstracts away its internals
-  * `node` contains consensus node with a wrapper data structure that abstracts away its internals
-  * `utils` contains some low-level utilities
-* `docs` contains documentation files
-* `frontend` handles majority of frontend logic with each module corresponding to a major application screen/view
-* `res` contains various non-code resources required for application operation and/or packaging
-  * `app.css` contains a few small non-critical tweaks for presentation, it will likely be necessary to ship a GTK4 theme with the app in the future to ensure consistent look
-  * `linux` contains Linux-specific resources
-  * `windows` contains Windows-specific resources
-* `main.rs` handles high-level UI and communication with backend, wiring everything together
+从高层次上看，项目分为几个大模块：
+* `backend` 处理所有后端功能
+  * `config` 包含具有读取、写入和验证能力的配置数据结构
+  * `farmer` 包含农民实现以及抽象其内部的封装数据结构
+  * `networking` 包含`farmer`和`node`共享的网络堆栈，以及抽象其内部的封装数据结构
+  * `node` 包含共识节点及其抽象内部的封装数据结构
+  * `utils` 包含一些低级实用程序
+* `docs` 包含文档文件
+* `frontend` 处理大部分前端逻辑，每个模块对应一个主要的应用屏幕/视图
+* `res` 包含应用操作和/或打包所需的各种非代码资源
+  * `app.css` 包含一些小的、非关键的展示调整，未来可能需要随应用一起发布GTK4主题以确保一致的外观
+  * `linux` 包含Linux特定资源
+  * `windows` 包含Windows特定资源
+* `main.rs` 处理高级UI和后端通信，将所有内容连接在一起
 
-Application supports bare minimum configuration and doesn't support operator functionality (not yet anyway).
+应用支持最少配置，并且目前还不支持操作员功能（至少目前还不支持）。
 
-## How to build
+## 如何构建
 
-In order to build this app you'll need to install both dependencies necessary for building
-[Subspace](https://github.com/subspace/subspace) and [GTK4](https://github.com/gtk-rs/gtk4-rs), follow their
-documentation for details, otherwise `cargo run` will get you where to want to be.
+要构建此应用，您需要安装[Subspace](https://github.com/subspace/subspace)和[GTK4](https://github.com/gtk-rs/gtk4-rs)所需的依赖项，详情请参阅它们的文档，否则`cargo run`将帮助您开始。
 
-## Contribution
-Contributions of various kinds are welcome and appreciated.
+## 贡献
+欢迎和感谢各种形式的贡献。
 
-## License
-Zero-Clause BSD
+## 许可证
+零条款BSD
 
 https://opensource.org/licenses/0BSD
 
-https://tldrlegal.com/license/bsd-0-clause-license 
+https://tldrlegal.com/license/bsd-0-clause-license
