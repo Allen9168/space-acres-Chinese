@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\frontend",
+    "\\src\\frontend\\configuration",
+    "\\src\\frontend\\running"
   ],
-  "SelectedNode": "\\C:\\Users\\wang\\Source\\Repos\\space-acres--",
   "PreviewInSolutionExplorer": false
 }

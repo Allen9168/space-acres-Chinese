@@ -450,25 +450,19 @@ impl FarmWidget {
 
     fn update_sector_tooltip(sector: &gtk::Box, sector_index: SectorIndex) {
         if sector.has_css_class(SectorState::Downloading.css_class()) {
-            sector.set_tooltip_text(Some(&format!("扇区 {}: 正在下载")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在下载")));
         } else if sector.has_css_class(SectorState::Encoding.css_class()) {
-            sector.set_tooltip_text(Some(&format!("扇区 {}: 正在编码")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在编码")));
         } else if sector.has_css_class(SectorState::Writing.css_class()) {
-            sector.set_tooltip_text(Some(&format!("扇区 {}: 正在写入")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在写入")));
         } else if sector.has_css_class(SectorState::Expired.css_class()) {
-            sector.set_tooltip_text(Some(&format!(
-                "扇区 {}: 已过期，等待重新绘图"
-            )));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 已过期，等待重新绘图")));
         } else if sector.has_css_class(SectorState::AboutToExpire.css_class()) {
-            sector.set_tooltip_text(Some(&format!(
-                "扇区 {}: 即将过期，等待重新绘图"
-            )));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 即将过期，等待重新绘图")));
         } else if sector.has_css_class(SectorState::Plotted.css_class()) {
-            sector.set_tooltip_text(Some(&format!("扇区 {}: 已更新")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 已更新")));
         } else {
-            sector.set_tooltip_text(Some(&format!(
-                "扇区 {}: 等待绘图"
-            )));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 等待绘图")));
         }
     }
 }
