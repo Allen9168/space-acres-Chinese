@@ -1,8 +1,9 @@
 
 
 
-# Space Acres
+# Space Acres 汉化版
 本分叉使用了GPT对Space进行了中文翻译,只修改了前端,原本请使用下面3个按钮进行链接
+关于更新:跟随主版本
 [![最新发布](https://img.shields.io/github/v/release/subspace/space-acres?display_name=tag&style=flat-square)](https://github.com/subspace/space-acres/releases)
 [![最新下载](https://img.shields.io/github/downloads/subspace/space-acres/latest/total?style=flat-square)](https://github.com/subspace/space-acres/releases/latest)
 [![Rust](https://img.shields.io/github/actions/workflow/status/subspace/space-acres/rust.yml?branch=main)](https://github.com/subspace/space-acres/actions/workflows/rust.yaml)
