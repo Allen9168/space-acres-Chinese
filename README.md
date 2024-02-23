@@ -54,8 +54,7 @@ Space Acres是一个针对[Subspace Network](https://subspace.network/)农业的
 
 应用支持最少配置，并且目前还不支持操作员功能（至少目前还不支持）。
 
-## 中文电报
+## 中文电报(非官方)
 
 https://t.me/subspacecn
 
-https://tldrlegal.com/license/bsd-0-clause-license
