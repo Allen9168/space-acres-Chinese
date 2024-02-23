@@ -63,51 +63,51 @@ impl LoadingView {
         match input {
             LoadingInput::BackendLoading(step) => {
                 self.message = match step {
-                    LoadingStep::LoadingConfiguration => "ÕıÔÚ¼ÓÔØÅäÖÃ...".to_string(),
-                    LoadingStep::ReadingConfiguration => "ÕıÔÚ¶ÁÈ¡ÅäÖÃ...".to_string(),
+                    LoadingStep::LoadingConfiguration => "æ­£åœ¨åŠ è½½é…ç½®...".to_string(),
+                    LoadingStep::ReadingConfiguration => "æ­£åœ¨è¯»å–é…ç½®...".to_string(),
                     LoadingStep::ConfigurationReadSuccessfully { .. } => {
-                        "ÅäÖÃ¶ÁÈ¡³É¹¦".to_string()
+                        "é…ç½®è¯»å–æˆåŠŸ".to_string()
                     },
-                    LoadingStep::CheckingConfiguration => "ÕıÔÚ¼ì²éÅäÖÃ...".to_string(),
-                    LoadingStep::ConfigurationIsValid => "ÅäÖÃÓĞĞ§".to_string(),
+                    LoadingStep::CheckingConfiguration => "æ­£åœ¨æ£€æŸ¥é…ç½®...".to_string(),
+                    LoadingStep::ConfigurationIsValid => "é…ç½®æœ‰æ•ˆ".to_string(),
                     LoadingStep::DecodingChainSpecification => {
-                        "ÕıÔÚ½âÂëÁ´¹æ·¶...".to_string()
+                        "æ­£åœ¨è§£ç é“¾è§„èŒƒ...".to_string()
                     },
                     LoadingStep::DecodedChainSpecificationSuccessfully => {
-                        "Á´¹æ·¶½âÂë³É¹¦".to_string()
+                        "é“¾è§„èŒƒè§£ç æˆåŠŸ".to_string()
                     },
-                    LoadingStep::CheckingNodePath => "ÕıÔÚ¼ì²é½ÚµãÂ·¾¶...".to_string(),
-                    LoadingStep::CreatingNodePath => "ÕıÔÚ´´½¨½ÚµãÂ·¾¶...".to_string(),
-                    LoadingStep::NodePathReady => "½ÚµãÂ·¾¶¾ÍĞ÷".to_string(),
+                    LoadingStep::CheckingNodePath => "æ­£åœ¨æ£€æŸ¥èŠ‚ç‚¹è·¯å¾„...".to_string(),
+                    LoadingStep::CreatingNodePath => "æ­£åœ¨åˆ›å»ºèŠ‚ç‚¹è·¯å¾„...".to_string(),
+                    LoadingStep::NodePathReady => "èŠ‚ç‚¹è·¯å¾„å°±ç»ª".to_string(),
                     LoadingStep::PreparingNetworkingStack => {
-                        "ÕıÔÚ×¼±¸ÍøÂç¶ÑÕ»...".to_string()
+                        "æ­£åœ¨å‡†å¤‡ç½‘ç»œå †æ ˆ...".to_string()
                     },
-                    LoadingStep::ReadingNetworkKeypair => "ÕıÔÚ¶ÁÈ¡ÍøÂçÃÜÔ¿¶Ô...".to_string(),
+                    LoadingStep::ReadingNetworkKeypair => "æ­£åœ¨è¯»å–ç½‘ç»œå¯†é’¥å¯¹...".to_string(),
                     LoadingStep::GeneratingNetworkKeypair => {
-                        "ÕıÔÚÉú³ÉÍøÂçÃÜÔ¿¶Ô...".to_string()
+                        "æ­£åœ¨ç”Ÿæˆç½‘ç»œå¯†é’¥å¯¹...".to_string()
                     },
                     LoadingStep::WritingNetworkKeypair => {
-                        "ÕıÔÚ½«ÍøÂçÃÜÔ¿¶ÔĞ´Èë´ÅÅÌ...".to_string()
+                        "æ­£åœ¨å°†ç½‘ç»œå¯†é’¥å¯¹å†™å…¥ç£ç›˜...".to_string()
                     },
                     LoadingStep::InstantiatingNetworkingStack => {
-                        "ÕıÔÚÊµÀı»¯ÍøÂç¶ÑÕ»...".to_string()
+                        "æ­£åœ¨å®ä¾‹åŒ–ç½‘ç»œå †æ ˆ...".to_string()
                     },
                     LoadingStep::NetworkingStackCreatedSuccessfully => {
-                        "ÍøÂç¶ÑÕ»´´½¨³É¹¦".to_string()
+                        "ç½‘ç»œå †æ ˆåˆ›å»ºæˆåŠŸ".to_string()
                     },
-                    LoadingStep::CreatingConsensusNode => "ÕıÔÚ´´½¨¹²Ê¶½Úµã...".to_string(),
+                    LoadingStep::CreatingConsensusNode => "æ­£åœ¨åˆ›å»ºå…±è¯†èŠ‚ç‚¹...".to_string(),
                     LoadingStep::ConsensusNodeCreatedSuccessfully => {
-                        "¹²Ê¶½Úµã´´½¨³É¹¦".to_string()
+                        "å…±è¯†èŠ‚ç‚¹åˆ›å»ºæˆåŠŸ".to_string()
                     },
-                    LoadingStep::CreatingFarmer => "ÕıÔÚ´´½¨Å©Ãñ½Úµã...".to_string(),
+                    LoadingStep::CreatingFarmer => "æ­£åœ¨åˆ›å»ºå†œæ°‘èŠ‚ç‚¹...".to_string(),
                     LoadingStep::FarmerCreatedSuccessfully => {
-                        "Å©Ãñ½Úµã´´½¨³É¹¦".to_string()
+                        "å†œæ°‘èŠ‚ç‚¹åˆ›å»ºæˆåŠŸ".to_string()
                     },
                     LoadingStep::WipingFarm { farm_index, path } => {
-                        format!("ÕıÔÚÇåÀíÅ©³¡ {farm_index} Î»ÓÚ {}...", path.display())
+                        format!("æ­£åœ¨æ¸…ç†å†œåœº {farm_index} ä½äº {}...", path.display())
                     },
                     LoadingStep::WipingNode { path } => {
-                        format!("ÕıÔÚÇåÀí½ÚµãÎ»ÓÚ {}...", path.display())
+                        format!("æ­£åœ¨æ¸…ç†èŠ‚ç‚¹ä½äº {}...", path.display())
                     }
                 };
             }

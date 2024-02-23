@@ -78,7 +78,7 @@ impl Component for RunningView {
 
                         gtk::LinkButton {
                             remove_css_class: "link",
-                            set_tooltip: "×ÜÕË»§Óà¶î¼°×ÔÓ¦ÓÃÆô¶¯ÒÔÀ´µÄÍÚ¿óÊÕÒæ£¬µã»÷²é¿´AstralÖĞµÄÏêÇé",
+                            set_tooltip: "æ€»è´¦æˆ·ä½™é¢åŠè‡ªåº”ç”¨å¯åŠ¨ä»¥æ¥çš„æŒ–çŸ¿æ”¶ç›Šï¼Œç‚¹å‡»æŸ¥çœ‹Astralä¸­çš„è¯¦æƒ…",
                             #[watch]
                             set_uri: &model.farmer_state.reward_address_url,
                             set_use_underline: false,
@@ -200,7 +200,7 @@ impl RunningView {
                 {
                     self.farms.insert(
                         u8::try_from(farm_index).expect(
-                            "²»Ö§³Ö³¬¹ı256¸öÅ©³¡£¨»ò»æÍ¼£©£¬ÕâÒ»µãÔÚºó¶ËÒÑ½øĞĞ¼ì²é£»",
+                            "ä¸æ”¯æŒè¶…è¿‡256ä¸ªå†œåœºï¼ˆæˆ–ç»˜å›¾ï¼‰ï¼Œè¿™ä¸€ç‚¹åœ¨åç«¯å·²è¿›è¡Œæ£€æŸ¥ï¼›",
                         ),
                         FarmWidgetInit {
                             farm,

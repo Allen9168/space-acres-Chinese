@@ -61,7 +61,7 @@ impl FactoryComponent for FarmWidget {
                     add_css_class: "heading",
                     set_halign: gtk::Align::Start,
                     #[watch]
-                    set_label: &format!("Å©³¡ {} µÄÂ·¾¶¼°Æä´óĞ¡", self.index.current_index()),
+                    set_label: &format!("å†œåœº {} çš„è·¯å¾„åŠå…¶å¤§å°", self.index.current_index()),
                 },
 
                 gtk::Box {
@@ -91,18 +91,18 @@ impl FactoryComponent for FarmWidget {
                             #[watch]
                             set_text: self.path.display().to_string().as_str(),
                             set_tooltip_markup: Some(
-                                "´æ´¢Å©³¡ÎÄ¼şµÄ¾ø¶ÔÂ·¾¶ \
-                                ÈÎºÎSSD¾ù¿É£¬ÎŞĞè¸ßÄÍÓÃĞÔ"
+                                "å­˜å‚¨å†œåœºæ–‡ä»¶çš„ç»å¯¹è·¯å¾„ \
+                                ä»»ä½•SSDå‡å¯ï¼Œæ— éœ€é«˜è€ç”¨æ€§"
                             ),
                         },
 
                         gtk::Button {
                             connect_clicked[sender, index] => move |_| {
                                 if sender.output(FarmWidgetOutput::OpenDirectory(index.clone())).is_err() {
-                                    warn!("ÎŞ·¨·¢ËÍ´ò¿ªÄ¿Â¼Êä³ö");
+                                    warn!("æ— æ³•å‘é€æ‰“å¼€ç›®å½•è¾“å‡º");
                                 }
                             },
-                            set_label: "Ñ¡Ôñ",
+                            set_label: "é€‰æ‹©",
                         },
                     },
 
@@ -126,19 +126,19 @@ impl FactoryComponent for FarmWidget {
                         #[track = "self.size.unknown()"]
                         set_text: self.size.as_str(),
                         set_tooltip_markup: Some(
-                            "Å©³¡µÄ´óĞ¡ \
-                            ×îÉÙĞèÒª2Gib¿Õ¼ä"
+                            "å†œåœºçš„å¤§å° \
+                            æœ€å°‘éœ€è¦2Gibç©ºé—´"
                         ),
                     },
 
                     gtk::Button {
                         connect_clicked[sender, index] => move |_| {
                             if sender.output(FarmWidgetOutput::Delete(index.clone())).is_err() {
-                                warn!("ÎŞ·¨·¢ËÍÉ¾³ıÊä³ö");
+                                warn!("æ— æ³•å‘é€åˆ é™¤è¾“å‡º");
                             }
                         },
                         set_icon_name: icon_name::CROSS,
-                        set_tooltip: "É¾³ı¸ÃÅ©³¡",
+                        set_tooltip: "åˆ é™¤è¯¥å†œåœº",
                     },
                 },
             },
@@ -179,7 +179,7 @@ impl FactoryComponent for FarmWidget {
             // Send notification up that validity was updated, such that parent view can re-render
             // view if necessary
             if sender.output(FarmWidgetOutput::ValidityUpdate).is_err() {
-                warn!("ÎŞ·¨·¢ËÍÓĞĞ§ĞÔ¸üĞÂÊä³ö");
+                warn!("æ— æ³•å‘é€æœ‰æ•ˆæ€§æ›´æ–°è¾“å‡º");
             }
         }
     }

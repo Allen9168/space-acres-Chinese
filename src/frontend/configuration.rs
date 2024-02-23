@@ -160,7 +160,7 @@ impl Component for ConfigurationView {
                                 gtk::Label {
                                     add_css_class: "heading",
                                     set_halign: gtk::Align::Start,
-                                    set_label: "½ÚµãÂ·¾¶",
+                                    set_label: "èŠ‚ç‚¹è·¯å¾„",
                                 },
 
                                 gtk::Box {
@@ -187,7 +187,7 @@ impl Component for ConfigurationView {
                                         #[watch]
                                         set_text: model.node_path.display().to_string().as_str(),
                                         set_tooltip_markup: Some(
-                                            "½ÚµãÎÄ¼þ½«±»´æ´¢µÄ¾ø¶ÔÂ·¾¶£¬Çë×¼±¸ÖÁÉÙ100 GiBµÄ¿Õ¼ä£¬ÍÆ¼öÊ¹ÓÃ¸ßÖÊÁ¿SSD"
+                                            "èŠ‚ç‚¹æ–‡ä»¶å°†è¢«å­˜å‚¨çš„ç»å¯¹è·¯å¾„ï¼Œè¯·å‡†å¤‡è‡³å°‘100 GiBçš„ç©ºé—´ï¼ŒæŽ¨èä½¿ç”¨é«˜è´¨é‡SSD"
                                         ),
                                     },
 
@@ -195,7 +195,7 @@ impl Component for ConfigurationView {
                                         connect_clicked => ConfigurationInput::OpenDirectory(
                                             DirectoryKind::NodePath
                                         ),
-                                        set_label: "Ñ¡Ôñ",
+                                        set_label: "é€‰æ‹©",
                                     },
                                 },
                             },
@@ -211,7 +211,7 @@ impl Component for ConfigurationView {
                                 gtk::Label {
                                     add_css_class: "heading",
                                     set_halign: gtk::Align::Start,
-                                    set_label: "½±ÀøµØÖ·",
+                                    set_label: "å¥–åŠ±åœ°å€",
                                 },
 
                                 gtk::Entry {
@@ -238,7 +238,7 @@ impl Component for ConfigurationView {
                                     #[track = "model.reward_address.unknown()"]
                                     set_text: &model.reward_address,
                                     set_tooltip_markup: Some(
-                                        "Ê×ÏÈÊ¹ÓÃSubwallet»òpolkadot{.js}À©Õ¹»òÈÎºÎÆäËûSubstrateÇ®°ü´´½¨Ëü£¨ÊÊÓÃÓÚÈÎºÎSubstrateÁ´µÄSS58¸ñÊ½µØÖ·£©"
+                                        "é¦–å…ˆä½¿ç”¨Subwalletæˆ–polkadot{.js}æ‰©å±•æˆ–ä»»ä½•å…¶ä»–Substrateé’±åŒ…åˆ›å»ºå®ƒï¼ˆé€‚ç”¨äºŽä»»ä½•Substrateé“¾çš„SS58æ ¼å¼åœ°å€ï¼‰"
                                     ),
                                 },
                             },
@@ -252,7 +252,7 @@ impl Component for ConfigurationView {
                     },
 
                     gtk::Expander {
-                        set_label: Some("¸ß¼¶ÅäÖÃ"),
+                        set_label: Some("é«˜çº§é…ç½®"),
 
                         gtk::Box {
                             set_orientation: gtk::Orientation::Vertical,
@@ -266,7 +266,7 @@ impl Component for ConfigurationView {
                                 gtk::Label {
                                     add_css_class: "heading",
                                     set_halign: gtk::Align::Start,
-                                    set_label: "ÍøÂçÅäÖÃ",
+                                    set_label: "ç½‘ç»œé…ç½®",
                                 },
 
                                 gtk::Box {
@@ -277,7 +277,7 @@ impl Component for ConfigurationView {
                                         set_spacing: 10,
 
                                         gtk::Label {
-                                            set_label: "P2P Ê¹ÓÃµÄ¶Ë¿Ú (TCP/UDP):"
+                                            set_label: "P2P ä½¿ç”¨çš„ç«¯å£ (TCP/UDP):"
                                         },
                                         gtk::SpinButton {
                                             connect_value_changed[sender] => move |entry| {
@@ -294,7 +294,7 @@ impl Component for ConfigurationView {
                                                 0.0,
                                             ),
                                             set_tooltip: &format!(
-                                                "Ä¬ÈÏ¶Ë¿ÚºÅÊÇ {}",
+                                                "é»˜è®¤ç«¯å£å·æ˜¯ {}",
                                                 NetworkConfiguration::default().substrate_port
                                             ),
                                             #[track = "model.network_configuration.substrate_port.unknown()"]
@@ -307,7 +307,7 @@ impl Component for ConfigurationView {
                                         set_spacing: 10,
 
                                         gtk::Label {
-                                            set_label: "DSN Ê¹ÓÃµÄ¶Ë¿Ú (TCP/UDP):"
+                                            set_label: "DSN ä½¿ç”¨çš„ç«¯å£ (TCP/UDP):"
                                         },
                                         gtk::SpinButton {
                                             connect_value_changed[sender] => move |entry| {
@@ -324,7 +324,7 @@ impl Component for ConfigurationView {
                                                 0.0,
                                             ),
                                             set_tooltip: &format!(
-                                                "Ä¬ÈÏ¶Ë¿ÚºÅÊÇ {}",
+                                                "é»˜è®¤ç«¯å£å·æ˜¯ {}",
                                                 NetworkConfiguration::default().subspace_port
                                             ),
                                             #[track = "model.network_configuration.subspace_port.unknown()"]
@@ -337,7 +337,7 @@ impl Component for ConfigurationView {
                                         set_spacing: 10,
 
                                         gtk::Label {
-                                            set_label: "¿ìËÙÍ¬²½:"
+                                            set_label: "å¿«é€ŸåŒæ­¥:"
                                         },
                                         gtk::Switch {
                                             connect_state_set[sender] => move |_switch, state| {
@@ -348,7 +348,7 @@ impl Component for ConfigurationView {
                                                 gtk::glib::Propagation::Proceed
                                             },
                                             set_tooltip:
-                                                "Ä¬ÈÏÇé¿öÏÂ£¬ÍøÂçÉèÖÃÊÇÎª¼ÒÓÃÂ·ÓÉÆ÷ÓÅ»¯µÄ£¬µ«Èç¹ûÄãÓÐ¸üÇ¿´óµÄÍøÂçÅäÖÃ£¬ÆôÓÃ¿ìËÙÍøÂç¿ÉÄÜ»áÌá¸ßÍ¬²½ËÙ¶ÈºÍÆäËû½ø³ÌµÄÐÔÄÜ¡£",
+                                                "é»˜è®¤æƒ…å†µä¸‹ï¼Œç½‘ç»œè®¾ç½®æ˜¯ä¸ºå®¶ç”¨è·¯ç”±å™¨ä¼˜åŒ–çš„ï¼Œä½†å¦‚æžœä½ æœ‰æ›´å¼ºå¤§çš„ç½‘ç»œé…ç½®ï¼Œå¯ç”¨å¿«é€Ÿç½‘ç»œå¯èƒ½ä¼šæé«˜åŒæ­¥é€Ÿåº¦å’Œå…¶ä»–è¿›ç¨‹çš„æ€§èƒ½ã€‚",
                                             #[watch]
                                             set_state: model.network_configuration.faster_networking,
                                         },
@@ -368,7 +368,7 @@ impl Component for ConfigurationView {
                                 connect_clicked => ConfigurationInput::AddFarm,
 
                                 gtk::Label {
-                                    set_label: "Ìí¼Ó farm",
+                                    set_label: "æ·»åŠ farm",
                                     set_margin_all: 10,
                                 },
                             },
@@ -383,7 +383,7 @@ impl Component for ConfigurationView {
                                     connect_clicked => ConfigurationInput::Cancel,
 
                                     gtk::Label {
-                                        set_label: "È¡Ïû",
+                                        set_label: "å–æ¶ˆ",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -398,7 +398,7 @@ impl Component for ConfigurationView {
                                         && model.farms.iter().all(FarmWidget::valid),
 
                                     gtk::Label {
-                                        set_label: "±£´æ",
+                                        set_label: "ä¿å­˜",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -412,7 +412,7 @@ impl Component for ConfigurationView {
                                     connect_clicked => ConfigurationInput::Back,
 
                                     gtk::Label {
-                                        set_label: "ºóÍË",
+                                        set_label: "åŽé€€",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -428,7 +428,7 @@ impl Component for ConfigurationView {
                                             && model.farms.iter().all(FarmWidget::valid),
 
                                     gtk::Label {
-                                        set_label: "¿ªÊ¼",
+                                        set_label: "å¼€å§‹",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -514,7 +514,7 @@ impl ConfigurationView {
                     None => {
                         warn!(
                             directory = %path.display(),
-                            "ÒÑÑ¡ÔñÄ¿Â¼£¬µ«Î´ÕÒµ½´ýÑ¡ÔñµÄÄÚÈÝ",
+                            "å·²é€‰æ‹©ç›®å½•ï¼Œä½†æœªæ‰¾åˆ°å¾…é€‰æ‹©çš„å†…å®¹",
                         );
                     }
                 }
@@ -570,17 +570,17 @@ impl ConfigurationView {
                     ))
                     .is_err()
                 {
-                    debug!("ÎÞ·¨·¢ËÍÅäÖÃÊä³ö::´ÓÐÂÅäÖÃ¿ªÊ¼");
+                    debug!("æ— æ³•å‘é€é…ç½®è¾“å‡º::ä»Žæ–°é…ç½®å¼€å§‹");
                 }
             }
             ConfigurationInput::Back => {
                 if sender.output(ConfigurationOutput::Back).is_err() {
-                    debug!("ÎÞ·¨·¢ËÍÅäÖÃÊä³ö::·µ»Ø");
+                    debug!("æ— æ³•å‘é€é…ç½®è¾“å‡º::è¿”å›ž");
                 }
             }
             ConfigurationInput::Cancel => {
                 if sender.output(ConfigurationOutput::Close).is_err() {
-                    debug!("ÎÞ·¨·¢ËÍÅäÖÃÊä³ö::¹Ø±Õ");
+                    debug!("æ— æ³•å‘é€é…ç½®è¾“å‡º::å…³é—­");
                 }
             }
             ConfigurationInput::Save => {
@@ -588,7 +588,7 @@ impl ConfigurationView {
                     .output(ConfigurationOutput::ConfigUpdate(self.create_raw_config()))
                     .is_err()
                 {
-                    debug!("ÎÞ·¨·¢ËÍÅäÖÃÊä³ö::ÅäÖÃ¸üÐÂ");
+                    debug!("æ— æ³•å‘é€é…ç½®è¾“å‡º::é…ç½®æ›´æ–°");
                 }
             }
             ConfigurationInput::Ignore => {
