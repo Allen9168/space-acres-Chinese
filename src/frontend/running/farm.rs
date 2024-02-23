@@ -135,7 +135,7 @@ impl FactoryComponent for FarmWidget {
                         set_spacing: 10,
                         #[watch]
                         set_tooltip: &format!(
-                            "ĞÔÄÜÍ³¼Æ£ºÆ½¾ùÊ±¼ä {:.2}Ãë£¬Ê±¼äÏŞÖÆ {:.2}Ãë",
+                            "æ€§èƒ½ç»Ÿè®¡ï¼šå¹³å‡æ—¶é—´ {:.2}ç§’ï¼Œæ—¶é—´é™åˆ¶ {:.2}ç§’",
                             self.auditing_time.get_average().as_secs_f32(),
                             MAX_AUDITING_TIME.as_secs_f32()
                         ),
@@ -163,7 +163,7 @@ impl FactoryComponent for FarmWidget {
                         set_spacing: 10,
                         #[watch]
                         set_tooltip: &format!(
-                            "ĞÔÄÜÍ³¼Æ£ºÆ½¾ùÊ±¼ä {:.2}Ãë£¬Ê±¼äÏŞÖÆ {:.2}Ãë",
+                            "æ€§èƒ½ç»Ÿè®¡ï¼šå¹³å‡æ—¶é—´ {:.2}ç§’ï¼Œæ—¶é—´é™åˆ¶ {:.2}ç§’",
                             self.proving_time.get_average().as_secs_f32(),
                             BLOCK_AUTHORING_DELAY.as_secs_f32()
                         ),
@@ -195,7 +195,7 @@ impl FactoryComponent for FarmWidget {
                                 .map(|error| error.to_string())
                                 .unwrap_or_default();
 
-                            format!("·¢Éú·ÇÖÂÃüÅ©Òµ´íÎó²¢ÒÑ»Ö¸´£¬Çë²ÎÔÄÈÕÖ¾ÁË½â¸ü¶àÏêÏ¸ĞÅÏ¢£º{last_error}")
+                            format!("å‘ç”Ÿéè‡´å‘½å†œä¸šé”™è¯¯å¹¶å·²æ¢å¤ï¼Œè¯·å‚é˜…æ—¥å¿—äº†è§£æ›´å¤šè¯¦ç»†ä¿¡æ¯ï¼š{last_error}")
                         },
                         set_visible: self.non_fatal_farming_error.is_some(),
                     },
@@ -206,7 +206,7 @@ impl FactoryComponent for FarmWidget {
             match (self.plotting_state, self.is_piece_cache_synced) {
                 (_, false) => gtk::Label {
                     set_halign: gtk::Align::Start,
-                    set_label: "µÈ´ıpiece»º´æÍ¬²½",
+                    set_label: "ç­‰å¾…pieceç¼“å­˜åŒæ­¥",
                 },
                 (PlottingState::Plotting { kind, progress }, _) => gtk::Box {
                     set_orientation: gtk::Orientation::Vertical,
@@ -215,9 +215,9 @@ impl FactoryComponent for FarmWidget {
                     gtk::Box {
                         set_spacing: 5,
                         set_tooltip: if self.farm_during_initial_plotting {
-                            "Í¬Ê±»æÍ¼+¸ûÖÖÔÚ¾ßÓĞ 8 ¸öÒÔÉÏÂß¼­ºËĞÄµÄ CPU ÉÏ×Ô¶¯ÔËĞĞ"
+                            "åŒæ—¶ç»˜å›¾+è€•ç§åœ¨å…·æœ‰ 8 ä¸ªä»¥ä¸Šé€»è¾‘æ ¸å¿ƒçš„ CPU ä¸Šè‡ªåŠ¨è¿è¡Œ"
                         } else {
-                            "ÔÚ¾ßÓĞ 8 ¸ö»ò¸üÉÙÂß¼­ºËĞÄµÄ CPU ÉÏÍê³É³õÊ¼»æÍ¼ºó¿ªÊ¼¸û×÷"
+                            "åœ¨å…·æœ‰ 8 ä¸ªæˆ–æ›´å°‘é€»è¾‘æ ¸å¿ƒçš„ CPU ä¸Šå®Œæˆåˆå§‹ç»˜å›¾åå¼€å§‹è€•ä½œ"
                         },
 
                         gtk::Label {
@@ -227,7 +227,7 @@ impl FactoryComponent for FarmWidget {
                             set_label: &{
                                 let plotting_speed = if self.sector_plotting_time.get_num_samples() > 0 {
                                      format!(
-                                        " Æ½¾ù({:.2} m/Ò»¸ösector, Ò»Ğ¡Ê±ÄÚÓĞ{:.2} ¸ösectors)",
+                                        " å¹³å‡({:.2} m/ä¸€ä¸ªsector, ä¸€å°æ—¶å†…æœ‰{:.2} ä¸ªsectors)",
                                         self.sector_plotting_time.get_average().as_secs_f32() / 60.0,
                                         3600.0 / self.sector_plotting_time.get_average().as_secs_f32()
                                     )
@@ -239,26 +239,26 @@ impl FactoryComponent for FarmWidget {
                                     PlottingKind::Initial => {
                                         if self.farm_during_initial_plotting {
                                             let farming = if self.is_node_synced {
-                                                "ÕıÔÚ¸ûÖÖ"
+                                                "æ­£åœ¨è€•ç§"
                                             } else {
-                                                "Î´¸ûÖÖ"
+                                                "æœªè€•ç§"
                                             };
                                             format!(
-                                                "³õÊ¼»æÍ¼g {:.2}%{}, {}",
+                                                "åˆå§‹ç»˜å›¾g {:.2}%{}, {}",
                                                 progress,
                                                 plotting_speed,
                                                 farming
                                             )
                                         } else {
                                             format!(
-                                                "³õÊ¼»æÍ¼ {:.2}%{}, Î´¸ûÖÖ",
+                                                "åˆå§‹ç»˜å›¾ {:.2}%{}, æœªè€•ç§",
                                                 progress,
                                                 plotting_speed,
                                             )
                                         }
                                     },
                                     PlottingKind::Replotting => format!(
-                                        "ÖØĞÂ»æÖÆ {:.2}%{}, farming",
+                                        "é‡æ–°ç»˜åˆ¶ {:.2}%{}, farming",
                                         progress,
                                         plotting_speed,
                                     ),
@@ -282,7 +282,7 @@ impl FactoryComponent for FarmWidget {
                         set_label: if self.is_node_synced {
                             "Farming"
                         } else {
-                            "µÈ´ı½ÚµãÍ¬²½"
+                            "ç­‰å¾…èŠ‚ç‚¹åŒæ­¥"
                         },
                     }
                 },
@@ -297,7 +297,7 @@ impl FactoryComponent for FarmWidget {
         for sector_index in 0..init.total_sectors {
             let sector = gtk::Box::builder()
                 .css_name("farm-sector")
-                .tooltip_text(format!("ÉÈÇø {sector_index}"))
+                .tooltip_text(format!("æ‰‡åŒº {sector_index}"))
                 .build();
             if sector_index < init.plotted_total_sectors {
                 sector.add_css_class("plotted")
@@ -450,24 +450,24 @@ impl FarmWidget {
 
     fn update_sector_tooltip(sector: &gtk::Box, sector_index: SectorIndex) {
         if sector.has_css_class(SectorState::Downloading.css_class()) {
-            sector.set_tooltip_text(Some(&format!("ÉÈÇø {}: ÕıÔÚÏÂÔØ")));
+            sector.set_tooltip_text(Some(&format!("æ‰‡åŒº {}: æ­£åœ¨ä¸‹è½½")));
         } else if sector.has_css_class(SectorState::Encoding.css_class()) {
-            sector.set_tooltip_text(Some(&format!("ÉÈÇø {}: ÕıÔÚ±àÂë")));
+            sector.set_tooltip_text(Some(&format!("æ‰‡åŒº {}: æ­£åœ¨ç¼–ç ")));
         } else if sector.has_css_class(SectorState::Writing.css_class()) {
-            sector.set_tooltip_text(Some(&format!("ÉÈÇø {}: ÕıÔÚĞ´Èë")));
+            sector.set_tooltip_text(Some(&format!("æ‰‡åŒº {}: æ­£åœ¨å†™å…¥")));
         } else if sector.has_css_class(SectorState::Expired.css_class()) {
             sector.set_tooltip_text(Some(&format!(
-                "ÉÈÇø {}: ÒÑ¹ıÆÚ£¬µÈ´ıÖØĞÂ»æÍ¼"
+                "æ‰‡åŒº {}: å·²è¿‡æœŸï¼Œç­‰å¾…é‡æ–°ç»˜å›¾"
             )));
         } else if sector.has_css_class(SectorState::AboutToExpire.css_class()) {
             sector.set_tooltip_text(Some(&format!(
-                "ÉÈÇø {}: ¼´½«¹ıÆÚ£¬µÈ´ıÖØĞÂ»æÍ¼"
+                "æ‰‡åŒº {}: å³å°†è¿‡æœŸï¼Œç­‰å¾…é‡æ–°ç»˜å›¾"
             )));
         } else if sector.has_css_class(SectorState::Plotted.css_class()) {
-            sector.set_tooltip_text(Some(&format!("ÉÈÇø {}: ÒÑ¸üĞÂ")));
+            sector.set_tooltip_text(Some(&format!("æ‰‡åŒº {}: å·²æ›´æ–°")));
         } else {
             sector.set_tooltip_text(Some(&format!(
-                "ÉÈÇø {}: µÈ´ı»æÍ¼"
+                "æ‰‡åŒº {}: ç­‰å¾…ç»˜å›¾"
             )));
         }
     }

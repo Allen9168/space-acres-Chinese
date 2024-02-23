@@ -80,7 +80,7 @@ impl Component for NodeView {
                         set_spacing: 10,
                         #[watch]
                         set_tooltip: &format!(
-                            "¿ÉÓÃ´ÅÅÌ¿Õ¼ä£ºÊ£Óà {}",
+                            "å¯ç”¨ç£ç›˜ç©ºé—´ï¼šå‰©ä½™ {}",
                             model.free_disk_space
                                 .map(|bytes| bytes.to_string_as(true))
                                 .unwrap_or_default()
@@ -116,7 +116,7 @@ impl Component for NodeView {
                     gtk::Label {
                         #[watch]
                         set_label: &format!(
-                            "ÕıÔÚÁ¬½ÓÍøÂç£¬×î¼ÑÇø¿é #{}",
+                            "æ­£åœ¨è¿æ¥ç½‘ç»œï¼Œæœ€ä½³åŒºå— #{}",
                             model.best_block_number
                         ),
                     }
@@ -134,12 +134,12 @@ impl Component for NodeView {
                             #[watch]
                             set_label: &{
                                 let kind = match kind {
-                                    SyncKind::Dsn => "´ÓDSNÍ¬²½",
-                                    SyncKind::Regular => "³£¹æÍ¬²½",
+                                    SyncKind::Dsn => "ä»DSNåŒæ­¥",
+                                    SyncKind::Regular => "å¸¸è§„åŒæ­¥",
                                 };
                                 let sync_speed = if model.block_import_time.get_num_samples() > 0 {
                                      let mut sync_speed = format!(
-                                        "£¬{:.2} Çø¿é/Ãë",
+                                        "ï¼Œ{:.2} åŒºå—/ç§’",
                                         1.0 / model.block_import_time.get_average().as_secs_f32(),
                                     );
 
@@ -147,17 +147,17 @@ impl Component for NodeView {
                                         let time_remaining = (target - model.best_block_number) * model.block_import_time.get_average();
                                         if time_remaining > Duration::from_secs(3600) {
                                             sync_speed += &format!(
-                                                " £¨Ê£ÓàÔ¼ {:.2} Ğ¡Ê±£©",
+                                                " ï¼ˆå‰©ä½™çº¦ {:.2} å°æ—¶ï¼‰",
                                                 time_remaining.as_secs_f32() / 3600.0
                                             );
                                         } else if time_remaining > Duration::from_secs(60) {
                                             sync_speed += &format!(
-                                                " £¨Ê£ÓàÔ¼ {:.2} ·ÖÖÓ£©",
+                                                " ï¼ˆå‰©ä½™çº¦ {:.2} åˆ†é’Ÿï¼‰",
                                                 time_remaining.as_secs_f32() / 60.0
                                             );
                                         } else {
                                             sync_speed += &format!(
-                                                " £¨Ê£ÓàÔ¼ {:.2} Ãë£©",
+                                                " ï¼ˆå‰©ä½™çº¦ {:.2} ç§’ï¼‰",
                                                 time_remaining.as_secs_f32()
                                             );
                                         }
@@ -191,7 +191,7 @@ impl Component for NodeView {
                 SyncState::Idle => gtk::Box {
                     gtk::Label {
                         #[watch]
-                        set_label: &format!("ÒÑÍ¬²½£¬×î¼ÑÇø¿é #{}", model.best_block_number),
+                        set_label: &format!("å·²åŒæ­¥ï¼Œæœ€ä½³åŒºå— #{}", model.best_block_number),
                     }
                 },
             },
@@ -247,7 +247,7 @@ impl NodeView {
             } => {
                 self.best_block_number = best_block_number;
                 self.chain_name = format!(
-                    "{} ¹²Ê¶½Úµã",
+                    "{} å…±è¯†èŠ‚ç‚¹",
                     chain_info
                         .chain_name
                         .strip_prefix("Subspace ")
@@ -339,11 +339,11 @@ impl NodeView {
                             }
                         }
                         Ok(Err(error)) => {
-                            error!(%error, "¼ì²éÊ£Óà´ÅÅÌ¿Õ¼äÊ§°Ü");
+                            error!(%error, "æ£€æŸ¥å‰©ä½™ç£ç›˜ç©ºé—´å¤±è´¥");
                             break;
                         }
                         Err(error) => {
-                            error!(%error, "Ê£Óà´ÅÅÌ¿Õ¼äÈÎÎñ³öÏÖÒì³£");
+                            error!(%error, "å‰©ä½™ç£ç›˜ç©ºé—´ä»»åŠ¡å‡ºç°å¼‚å¸¸");
                             break;
                         }
                     }
