@@ -458,7 +458,9 @@ impl FarmWidget {
         } else if sector.has_css_class(SectorState::Expired.css_class()) {
             sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 已过期，等待重新绘图")));
         } else if sector.has_css_class(SectorState::AboutToExpire.css_class()) {
-            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 即将过期，等待重新绘图")));
+            sector.set_tooltip_text(Some(&format!(
+                "扇区 {sector_index}: 即将过期，等待重新绘图"
+            )));
         } else if sector.has_css_class(SectorState::Plotted.css_class()) {
             sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 已更新")));
         } else {
