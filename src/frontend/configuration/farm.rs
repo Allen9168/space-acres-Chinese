@@ -114,7 +114,7 @@ impl FactoryComponent for FarmWidget {
                             sender.input(FarmWidgetInput::FarmSizeChanged(entry.text().into()));
                         },
                         set_placeholder_text: Some(
-                            "4T, 2.5TB, 500GiB, etc.",
+                            "大小:200Gib, 或者2Tib等等",
                         ),
                         set_primary_icon_name: Some(icon_name::SIZE_HORIZONTALLY),
                         set_primary_icon_activatable: false,

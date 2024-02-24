@@ -262,12 +262,12 @@ impl AsyncComponent for App {
 
                             gtk::Label {
                                 set_label: indoc::indoc! {"
-                                    Space Acres is an opinionated GUI application for farming on Subspace Network.
+                                    Space Acres 是用于Subspace Network耕种UI应用程序.
 
-                                    Before continuing you need 3 things:
-                                    ✔ Wallet address where you'll receive rewards (use Subwallet, polkadot{.js} extension or any other wallet compatible with Substrate chain)
-                                    ✔ 100G of space on a good quality SSD to store node data
-                                    ✔ any SSDs (or multiple) with as much space as you can afford for farming purposes, this is what will generate rewards"
+                                    3个提示:
+                                    ✔ 您将在其中接收奖励的钱包地址（使用 Subwallet、polkadot{.js} 扩展或任何其他与 Substrate 链兼容的钱包）
+                                    ✔ 最好准备100g的空间留给node节点使用
+                                    ✔ 最好使用SSD固态,你承诺的空间越多,获得的奖励越多"
                                 },
                                 set_wrap: true,
                             },
@@ -281,7 +281,7 @@ impl AsyncComponent for App {
                                     connect_clicked => AppInput::InitialConfiguration,
 
                                     gtk::Label {
-                                        set_label: "Continue",
+                                        set_label: "下一步",
                                         set_margin_all: 10,
                                     },
                                 },
