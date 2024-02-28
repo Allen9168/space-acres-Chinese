@@ -202,13 +202,12 @@ jobs:
           
           dotnet tool install --global AzureSignTool
 
-          # 根据不同的CPU架构签名不同的MSI文件
-          $suffix = if ("${{ matrix.build.rustflags }}" -match "v2") { "v2" } else { "skylake" }
-          $files = Get-ChildItem -Path target\wix -Include "space-acres-*-$suffix.msi" -Recurse
-          foreach ($file in $files) {
-            Write-Host "Signing $file"
-            AzureSignTool sign --azure-key-vault-url "${{ secrets.AZURE_KEY_VAULT_URI }}" --azure-key-vault-client-id "${{ secrets.AZURE_CLIENT_ID }}" --azure-key-vault-client-secret "${{ secrets.AZURE_CLIENT_SECRET }}" --azure-key-vault-tenant-id "${{ secrets.AZURE_TENANT_ID }}" --azure-key-vault-certificate "${{ secrets.AZURE_CERT_NAME }}" --file-digest sha512 --timestamp-rfc3161 http://timestamp.digicert.com -v $file
+          (Get-ChildItem -Path target\wix -Include space-acres-*.msi -Recurse) | ForEach-Object {
+            Write("Signing $($_)");
+          
+            AzureSignTool sign --azure-key-vault-url "${{ secrets.AZURE_KEY_VAULT_URI }}" --azure-key-vault-client-id "${{ secrets.AZURE_CLIENT_ID }}" --azure-key-vault-client-secret "${{ secrets.AZURE_CLIENT_SECRET }}" --azure-key-vault-tenant-id "${{ secrets.AZURE_TENANT_ID }}" --azure-key-vault-certificate "${{ secrets.AZURE_CERT_NAME }}" --file-digest sha512 --timestamp-rfc3161 http://timestamp.digicert.com -v $($_);
           }
+        # Allow code signing to fail on non-release builds and in non-subspace repos (forks)
         continue-on-error: ${{ github.repository_owner != 'subspace' || github.event_name != 'push' || github.ref_type != 'tag' }}
         if: runner.os == 'Windows'
 
@@ -217,16 +216,16 @@ jobs:
         with:
           name: installer-${{ matrix.build.suffix }}
           path: |
-            target/wix/*-${{ matrix.build.suffix }}.msi
+            target/wix/*.msi
           if-no-files-found: error
         if: runner.os == 'Windows'
 
       - name: Upload installer to assets (Windows)
         uses: alexellis/upload-assets@259de5111cb56966d046ced998941e93f91d2c93 # @0.4.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          asset_paths: '["target/wix/*-${{ matrix.build.suffix }}.msi"]'
+          asset_paths: '["target/wix/*.msi"]'
         if: runner.os == 'Windows' && github.event_name == 'push' && github.ref_type == 'tag'
 
       - name: Install cargo-deb (Linux)
