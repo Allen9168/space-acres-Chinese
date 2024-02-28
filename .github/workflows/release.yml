@@ -226,7 +226,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           asset_paths: '["target/wix/*.msi"]'
-        if: runner.os == 'Windows' && github.event_name == 'push' && github.ref_type == 'tag'
+        if: runner.os == 'Windows'
 
       - name: Install cargo-deb (Linux)
         uses: taiki-e/cache-cargo-install-action@1b76958d032c4d048c599f9fdfa48abe804d6319 # v1.2.2
