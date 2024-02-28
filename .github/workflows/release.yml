@@ -198,9 +198,9 @@ jobs:
 
 
 
-      - name: Rename MSI for v2 configuration (Windows)
+      - name: Rename MSI for specific configuration (Windows)
         run: |
-          if("${{ matrix.build.suffix }}" -like "*-v2-*") {
+          if("${{ matrix.build.suffix }}" -contains "windows-x86_64-v2-${{ github.ref_name }}") {
           $originalName = (Get-ChildItem target\wix\space-acres-*.msi).Name
           $newName = $originalName.Replace(".msi", "-v2.msi")
           Rename-Item "target\wix\$originalName" "target\wix\$newName"
