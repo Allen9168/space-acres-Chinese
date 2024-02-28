@@ -196,6 +196,17 @@ jobs:
           Remove-Item target\wix\gtk4 -Recurse -Confirm:$false -ErrorAction SilentlyContinue
         if: runner.os == 'Windows'
 
+
+
+      - name: Rename MSI for v2 configuration (Windows)
+        run: |
+          if("${{ matrix.build.suffix }}" -like "*-v2-*") {
+          $originalName = (Get-ChildItem target\wix\space-acres-*.msi).Name
+          $newName = $originalName.Replace(".msi", "-v2.msi")
+          Rename-Item "target\wix\$originalName" "target\wix\$newName"
+          }
+        if: runner.os == 'Windows'
+
       - name: Sign Application (Windows)
         run: |
           $ErrorActionPreference = "Stop"
