@@ -41,8 +41,8 @@ jobs:
             rustflags: "-C target-cpu=skylake"
           - os: windows-2022
             target: x86_64-pc-windows-msvc
-            suffix: windows-x86_64-ivybridge-${{ github.ref_name }}
-            rustflags: "-C target-cpu=ivybridge"
+            suffix: windows-x86_64-v2-${{ github.ref_name }}
+            rustflags: "-C target-cpu=x86-64-v2 -C target-feature=+aes"
     runs-on: ${{ matrix.build.os }}
     env:
       RUSTFLAGS: ${{ matrix.build.rustflags }}
@@ -203,7 +203,7 @@ jobs:
           dotnet tool install --global AzureSignTool
 
           # 根据不同的CPU架构签名不同的MSI文件
-          $suffix = if ("${{ matrix.build.rustflags }}" -match "ivybridge") { "ivybridge" } else { "skylake" }
+          $suffix = if ("${{ matrix.build.rustflags }}" -match "v2") { "v2" } else { "skylake" }
           $files = Get-ChildItem -Path target\wix -Include "space-acres-*-$suffix.msi" -Recurse
           foreach ($file in $files) {
             Write-Host "Signing $file"
