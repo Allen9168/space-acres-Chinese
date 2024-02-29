@@ -201,11 +201,27 @@ jobs:
       - name: Rename MSI for specific configuration (Windows)
         run: |
           if("${{ matrix.build.suffix }}" -contains "windows-x86_64-v2-${{ github.ref_name }}") {
-          $originalName = (Get-ChildItem target\wix\space-acres-*.msi).Name
-          $newName = $originalName.Replace(".msi", "-v2.msi")
-          Rename-Item "target\wix\$originalName" "target\wix\$newName"
+           $files = Get-ChildItem target\wix\space-acres-*.msi
+           if ($files.Count -eq 0) {
+             Write-Host "No MSI files found in target\wix."
+             exit 1
           }
+          foreach ($file in $files) {
+            $originalName = $file.Name
+            $newName = $originalName.Replace(".msi", "-v2.msi")
+            $originalFullPath = "target\wix\$originalName"
+            $newFullPath = "target\wix\$newName"
+            if(Test-Path $newFullPath) {
+             Write-Host "File $newFullPath already exists."
+            } else {
+              Rename-Item $originalFullPath $newFullPath -ErrorAction Stop
+              Write-Host "Renamed $originalFullPath to $newFullPath"
+              }
+            }
+          }
+        shell: pwsh
         if: runner.os == 'Windows'
+
 
       - name: Sign Application (Windows)
         run: |
