@@ -41,7 +41,7 @@ jobs:
             rustflags: "-C target-cpu=skylake"
           - os: windows-2022
             target: x86_64-pc-windows-msvc
-            suffix: windows-x86_64-v2-${{ github.ref_name }}
+            suffix: windows-x86_64-v2
             rustflags: "-C target-cpu=x86-64-v2 -C target-feature=+aes"
     runs-on: ${{ matrix.build.os }}
     env:
@@ -195,33 +195,6 @@ jobs:
 
           Remove-Item target\wix\gtk4 -Recurse -Confirm:$false -ErrorAction SilentlyContinue
         if: runner.os == 'Windows'
-
-
-
-      - name: Rename MSI for specific configuration (Windows)
-        run: |
-          if("${{ matrix.build.suffix }}" -contains "windows-x86_64-v2-${{ github.ref_name }}") {
-           $files = Get-ChildItem target\wix\space-acres-*.msi
-           if ($files.Count -eq 0) {
-             Write-Host "No MSI files found in target\wix."
-             exit 1
-          }
-          foreach ($file in $files) {
-            $originalName = $file.Name
-            $newName = $originalName.Replace(".msi", "-v2.msi")
-            $originalFullPath = "target\wix\$originalName"
-            $newFullPath = "target\wix\$newName"
-            if(Test-Path $newFullPath) {
-             Write-Host "File $newFullPath already exists."
-            } else {
-              Rename-Item $originalFullPath $newFullPath -ErrorAction Stop
-              Write-Host "Renamed $originalFullPath to $newFullPath"
-              }
-            }
-          }
-        shell: pwsh
-        if: runner.os == 'Windows'
-
 
       - name: Sign Application (Windows)
         run: |
