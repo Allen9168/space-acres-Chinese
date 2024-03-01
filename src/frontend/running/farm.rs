@@ -133,7 +133,7 @@ impl FactoryComponent for FarmWidget {
                         set_spacing: 10,
                         #[watch]
                         set_tooltip: &format!(
-                            "Auditing performance: average time {:.2}s, time limit {:.2}s",
+                            "性能统计：平均时间 {:.2}秒，时间限制 {:.2}秒",
                             self.auditing_time.get_average().as_secs_f32(),
                             MAX_AUDITING_TIME.as_secs_f32()
                         ),
@@ -161,7 +161,7 @@ impl FactoryComponent for FarmWidget {
                         set_spacing: 10,
                         #[watch]
                         set_tooltip: &format!(
-                            "Proving performance: average time {:.2}s, time limit {:.2}s",
+                            "性能统计：平均时间 {:.2}秒，时间限制 {:.2}秒",
                             self.proving_time.get_average().as_secs_f32(),
                             BLOCK_AUTHORING_DELAY.as_secs_f32()
                         ),
@@ -193,7 +193,7 @@ impl FactoryComponent for FarmWidget {
                                 .map(|error| error.to_string())
                                 .unwrap_or_default();
 
-                            format!("Non-fatal farming error happened and was recovered, see logs for more details: {last_error}")
+                            format!("发生非致命农业错误并已恢复，请参阅日志了解更多详细信息：{last_error}")
                         },
                         set_visible: self.non_fatal_farming_error.is_some(),
                     },
@@ -209,9 +209,9 @@ impl FactoryComponent for FarmWidget {
                     gtk::Box {
                         set_spacing: 5,
                         set_tooltip: if self.farm_during_initial_plotting {
-                            "Farming runs in parallel to plotting on CPUs with more than 8 logical cores"
+                            "同时绘图+耕种在具有 8 个以上逻辑核心的 CPU 上自动运行"
                         } else {
-                            "Farming starts after initial plotting is complete on CPUs with 8 or less logical cores"
+                            "在 8 个或更少逻辑核心的 CPU 上完成初始绘图后开始耕作"
                         },
 
                         gtk::Label {
@@ -221,7 +221,7 @@ impl FactoryComponent for FarmWidget {
                             set_label: &{
                                 let plotting_speed = if self.sector_plotting_time.get_num_samples() > 0 {
                                      format!(
-                                        " ({:.2} m/sector, {:.2} sectors/h)",
+                                        " 平均({:.2} m/一个sector, 一小时内有{:.2} 个sectors)",
                                         self.sector_plotting_time.get_average().as_secs_f32() / 60.0,
                                         3600.0 / self.sector_plotting_time.get_average().as_secs_f32()
                                     )
@@ -233,26 +233,26 @@ impl FactoryComponent for FarmWidget {
                                     PlottingKind::Initial => {
                                         if self.farm_during_initial_plotting {
                                             let farming = if self.is_node_synced {
-                                                "farming"
+                                                "正在耕种"
                                             } else {
-                                                "not farming"
+                                                "未耕种"
                                             };
                                             format!(
-                                                "Initial plotting {:.2}%{}, {}",
+                                                "初始绘图g {:.2}%{}, {}",
                                                 progress,
                                                 plotting_speed,
                                                 farming
                                             )
                                         } else {
                                             format!(
-                                                "Initial plotting {:.2}%{}, not farming",
+                                                "初始绘图 {:.2}%{}, 未耕种",
                                                 progress,
                                                 plotting_speed,
                                             )
                                         }
                                     },
                                     PlottingKind::Replotting => format!(
-                                        "Replotting {:.2}%{}, farming",
+                                        "重新绘制 {:.2}%{}, farming",
                                         progress,
                                         plotting_speed,
                                     ),
@@ -276,7 +276,7 @@ impl FactoryComponent for FarmWidget {
                         set_label: if self.is_node_synced {
                             "Farming"
                         } else {
-                            "Waiting for node to sync"
+                            "等待节点同步"
                         },
                     }
                 },
@@ -291,7 +291,7 @@ impl FactoryComponent for FarmWidget {
         for sector_index in 0..init.total_sectors {
             let sector = gtk::Box::builder()
                 .css_name("farm-sector")
-                .tooltip_text(format!("Sector {sector_index}"))
+                .tooltip_text(format!("扇区 {sector_index}"))
                 .build();
             if sector_index < init.plotted_total_sectors {
                 sector.add_css_class("plotted")
@@ -440,24 +440,24 @@ impl FarmWidget {
 
     fn update_sector_tooltip(sector: &gtk::Box, sector_index: SectorIndex) {
         if sector.has_css_class(SectorState::Downloading.css_class()) {
-            sector.set_tooltip_text(Some(&format!("Sector {sector_index}: downloading")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在下载")));
         } else if sector.has_css_class(SectorState::Encoding.css_class()) {
-            sector.set_tooltip_text(Some(&format!("Sector {sector_index}: encoding")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在编码")));
         } else if sector.has_css_class(SectorState::Writing.css_class()) {
-            sector.set_tooltip_text(Some(&format!("Sector {sector_index}: writing")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在写入")));
         } else if sector.has_css_class(SectorState::Expired.css_class()) {
             sector.set_tooltip_text(Some(&format!(
-                "Sector {sector_index}: expired, waiting to be replotted"
+                "扇区 {sector_index}: 已过期，等待重新绘图"
             )));
         } else if sector.has_css_class(SectorState::AboutToExpire.css_class()) {
             sector.set_tooltip_text(Some(&format!(
-                "Sector {sector_index}: about to expire, waiting to be replotted"
+                "扇区 {sector_index}: 即将过期，等待重新绘图"
             )));
         } else if sector.has_css_class(SectorState::Plotted.css_class()) {
-            sector.set_tooltip_text(Some(&format!("Sector {sector_index}: up to date")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 已更新")));
         } else {
             sector.set_tooltip_text(Some(&format!(
-                "Sector {sector_index}: waiting to be plotted"
+                "扇区 {sector_index}: 等待绘图"
             )));
         }
     }
