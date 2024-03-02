@@ -198,9 +198,8 @@ impl RunningView {
                     .enumerate()
                 {
                     self.farms.insert(
-                        u8::try_from(farm_index).expect(
-                            "不支持超过256个农场（或绘图），这一点在后端已进行检查；",
-                        ),
+                        u8::try_from(farm_index)
+                            .expect("不支持超过256个农场（或绘图），这一点在后端已进行检查；"),
                         FarmWidgetInit {
                             farm,
                             total_sectors: initial_farm_state.total_sectors_count,
