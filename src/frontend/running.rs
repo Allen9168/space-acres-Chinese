@@ -70,7 +70,7 @@ impl Component for RunningView {
                     gtk::Label {
                         add_css_class: "heading",
                         set_halign: gtk::Align::Start,
-                        set_label: "Farmer",
+                        set_label: "农场",
                     },
                     gtk::Box {
                         set_halign: gtk::Align::End,
@@ -78,7 +78,7 @@ impl Component for RunningView {
 
                         gtk::LinkButton {
                             remove_css_class: "link",
-                            set_tooltip: "Total account balance and coins farmed since application started, click to see details in Astral",
+                            set_tooltip: "总账户余额及自应用启动以来的挖矿收益，点击查看Astral中的详情",
                             #[watch]
                             set_uri: &model.farmer_state.reward_address_url,
                             set_use_underline: false,

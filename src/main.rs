@@ -228,20 +228,20 @@ impl AsyncComponent for App {
 
                                     gtk::Button {
                                         connect_clicked => AppInput::OpenLogFolder,
-                                        set_label: "Show logs in file manager",
+                                        set_label: "在文件管理器中显示日志",
                                         set_visible: model.app_data_dir.is_some(),
                                     },
 
                                     gtk::Button {
                                         connect_clicked => AppInput::OpenReconfiguration,
-                                        set_label: "Update configuration",
+                                        set_label: "更新配置",
                                         #[watch]
                                         set_visible: model.current_raw_config.is_some(),
                                     },
 
                                     gtk::Button {
                                         connect_clicked => AppInput::ShowAboutDialog,
-                                        set_label: "About",
+                                        set_label: "关于",
                                     },
                                 },
                             },
@@ -271,12 +271,12 @@ impl AsyncComponent for App {
 
                             gtk::Label {
                                 set_label: indoc::indoc! {"
-                                    Space Acres is an opinionated GUI application for farming on Subspace Network.
+                                    Space Acres 是用于Subspace Network耕种UI应用程序.
 
-                                    Before continuing you need 3 things:
-                                    ✔ Wallet address where you'll receive rewards (use Subwallet, polkadot{.js} extension or any other wallet compatible with Substrate chain)
-                                    ✔ 100G of space on a good quality SSD to store node data
-                                    ✔ any SSDs (or multiple) with as much space as you can afford for farming purposes, this is what will generate rewards"
+                                    3个提示:
+                                    ✔ 您将在其中接收奖励的钱包地址（使用 Subwallet、polkadot{.js} 扩展或任何其他与 Substrate 链兼容的钱包）
+                                    ✔ 最好准备100g的空间留给node节点使用
+                                    ✔ 最好使用SSD固态,你承诺的空间越多,获得的奖励越多"
                                 },
                                 set_wrap: true,
                             },
@@ -290,7 +290,7 @@ impl AsyncComponent for App {
                                     connect_clicked => AppInput::InitialConfiguration,
 
                                     gtk::Label {
-                                        set_label: "Continue",
+                                        set_label: "下一步",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -311,11 +311,11 @@ impl AsyncComponent for App {
 
                             gtk::Label {
                                 set_label: indoc::indoc! {"
-                                    Thanks for choosing Space Acres again!
+                                    感谢您再次选择Space Acres！
 
-                                    The chain you were running before upgrade is no longer compatible with this release of Space Acres, likely because you were participating in the previous version of Subspace Network.
+                                    您在升级之前运行的链不再与此版本的 Space Acres 兼容，可能是因为您正在参与以前版本的 Subspace Network。
 
-                                    But fear not, you can upgrade to currently supported network with a single click of a button!"
+                                    但不用担心，只需单击一个按钮即可升级到当前支持的网络！"
                                 },
                                 set_wrap: true,
                             },
@@ -330,7 +330,7 @@ impl AsyncComponent for App {
 
                                     gtk::Label {
                                         #[watch]
-                                        set_label: &format!("Upgrade to {chain_name}"),
+                                        set_label: &format!("升级到 {chain_name}"),
                                         set_margin_all: 10,
                                     },
                                 },
@@ -343,19 +343,19 @@ impl AsyncComponent for App {
                             // TODO: Better error handling
                             gtk::Label {
                                 #[watch]
-                                set_label: &format!("Stopped with error: {error}"),
+                                set_label: &format!("因错误而停止: {error}"),
                             }
                         }
                         View::Stopped(None) => {
                             gtk::Label {
-                                set_label: "Stopped 🛑",
+                                set_label: "已停止 🛑",
                             }
                         }
                         View::Error(error) => {
                             // TODO: Better error handling
                             gtk::Label {
                                 #[watch]
-                                set_label: &format!("Error: {error}"),
+                                set_label: &format!("错误: {error}"),
                             }
                         },
                     },
@@ -383,7 +383,7 @@ impl AsyncComponent for App {
                         gtk::Button {
                             add_css_class: "suggested-action",
                             connect_clicked => AppInput::Restart,
-                            set_label: "Restart",
+                            set_label: "重新开始",
                             #[watch]
                             set_visible: model.status_bar_notification.restart_button(),
                         },

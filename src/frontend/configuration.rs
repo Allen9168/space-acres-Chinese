@@ -160,7 +160,7 @@ impl Component for ConfigurationView {
                                 gtk::Label {
                                     add_css_class: "heading",
                                     set_halign: gtk::Align::Start,
-                                    set_label: "Node path",
+                                    set_label: "节点路径",
                                 },
 
                                 gtk::Box {
@@ -187,9 +187,7 @@ impl Component for ConfigurationView {
                                         #[watch]
                                         set_text: model.node_path.display().to_string().as_str(),
                                         set_tooltip_markup: Some(
-                                            "Absolute path where node files will be stored, prepare to \
-                                            dedicate at least 100 GiB of space for it, good quality SSD \
-                                            recommended"
+                                            "节点文件将被存储的绝对路径，请准备至少100 GiB的空间，推荐使用高质量SSD"
                                         ),
                                     },
 
@@ -197,7 +195,7 @@ impl Component for ConfigurationView {
                                         connect_clicked => ConfigurationInput::OpenDirectory(
                                             DirectoryKind::NodePath
                                         ),
-                                        set_label: "Select",
+                                        set_label: "选择",
                                     },
                                 },
                             },
@@ -213,7 +211,7 @@ impl Component for ConfigurationView {
                                 gtk::Label {
                                     add_css_class: "heading",
                                     set_halign: gtk::Align::Start,
-                                    set_label: "Rewards address",
+                                    set_label: "奖励地址",
                                 },
 
                                 gtk::Entry {
@@ -240,9 +238,7 @@ impl Component for ConfigurationView {
                                     #[track = "model.reward_address.unknown()"]
                                     set_text: &model.reward_address,
                                     set_tooltip_markup: Some(
-                                        "Use Subwallet or polkadot{.js} extension or any other \
-                                        Substrate wallet to create it first (address for any Substrate \
-                                        chain in SS58 format works)"
+                                        "首先使用Subwallet或polkadot{.js}扩展或任何其他Substrate钱包创建它（适用于任何Substrate链的SS58格式地址）"
                                     ),
                                 },
                             },
@@ -256,7 +252,7 @@ impl Component for ConfigurationView {
                     },
 
                     gtk::Expander {
-                        set_label: Some("Advanced configuration"),
+                        set_label: Some("高级配置"),
 
                         gtk::Box {
                             set_orientation: gtk::Orientation::Vertical,
@@ -270,7 +266,7 @@ impl Component for ConfigurationView {
                                 gtk::Label {
                                     add_css_class: "heading",
                                     set_halign: gtk::Align::Start,
-                                    set_label: "Network configuration",
+                                    set_label: "网络配置",
                                 },
 
                                 gtk::Box {
@@ -281,7 +277,7 @@ impl Component for ConfigurationView {
                                         set_spacing: 10,
 
                                         gtk::Label {
-                                            set_label: "Substrate (blockchain) P2P port (TCP/UDP):"
+                                            set_label: "P2P 使用的端口 (TCP/UDP):"
                                         },
                                         gtk::SpinButton {
                                             connect_value_changed[sender] => move |entry| {
@@ -298,7 +294,7 @@ impl Component for ConfigurationView {
                                                 0.0,
                                             ),
                                             set_tooltip: &format!(
-                                                "Default port number is {}",
+                                                "默认端口号是 {}",
                                                 NetworkConfiguration::default().substrate_port
                                             ),
                                             #[track = "model.network_configuration.substrate_port.unknown()"]
@@ -311,7 +307,7 @@ impl Component for ConfigurationView {
                                         set_spacing: 10,
 
                                         gtk::Label {
-                                            set_label: "Subspace (DSN) P2P port (TCP/UDP):"
+                                            set_label: "DSN 使用的端口 (TCP/UDP):"
                                         },
                                         gtk::SpinButton {
                                             connect_value_changed[sender] => move |entry| {
@@ -328,7 +324,7 @@ impl Component for ConfigurationView {
                                                 0.0,
                                             ),
                                             set_tooltip: &format!(
-                                                "Default port number is {}",
+                                                "默认端口号是 {}",
                                                 NetworkConfiguration::default().subspace_port
                                             ),
                                             #[track = "model.network_configuration.subspace_port.unknown()"]
@@ -341,7 +337,7 @@ impl Component for ConfigurationView {
                                         set_spacing: 10,
 
                                         gtk::Label {
-                                            set_label: "Faster networking:"
+                                            set_label: "快速同步:"
                                         },
                                         gtk::Switch {
                                             connect_state_set[sender] => move |_switch, state| {
@@ -352,7 +348,7 @@ impl Component for ConfigurationView {
                                                 gtk::glib::Propagation::Proceed
                                             },
                                             set_tooltip:
-                                                "By default networking is optimized for consumer routers, but if you have more powerful setup, faster networking may improve sync speed and other processes",
+                                                "默认情况下，网络设置是为家用路由器优化的，但如果你有更强大的网络配置，启用快速网络可能会提高同步速度和其他进程的性能。",
                                             #[watch]
                                             set_state: model.network_configuration.faster_networking,
                                         },
@@ -372,7 +368,7 @@ impl Component for ConfigurationView {
                                 connect_clicked => ConfigurationInput::AddFarm,
 
                                 gtk::Label {
-                                    set_label: "Add farm",
+                                    set_label: "添加farm",
                                     set_margin_all: 10,
                                 },
                             },
@@ -387,7 +383,7 @@ impl Component for ConfigurationView {
                                     connect_clicked => ConfigurationInput::Cancel,
 
                                     gtk::Label {
-                                        set_label: "Cancel",
+                                        set_label: "取消",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -402,7 +398,7 @@ impl Component for ConfigurationView {
                                         && model.farms.iter().all(FarmWidget::valid),
 
                                     gtk::Label {
-                                        set_label: "Save",
+                                        set_label: "保存",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -416,7 +412,7 @@ impl Component for ConfigurationView {
                                     connect_clicked => ConfigurationInput::Back,
 
                                     gtk::Label {
-                                        set_label: "Back",
+                                        set_label: "后退",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -432,7 +428,7 @@ impl Component for ConfigurationView {
                                             && model.farms.iter().all(FarmWidget::valid),
 
                                     gtk::Label {
-                                        set_label: "Start",
+                                        set_label: "开始",
                                         set_margin_all: 10,
                                     },
                                 },
@@ -518,7 +514,7 @@ impl ConfigurationView {
                     None => {
                         warn!(
                             directory = %path.display(),
-                            "Directory selected, but no pending selection found",
+                            "已选择目录，但未找到待选择的内容",
                         );
                     }
                 }
@@ -574,17 +570,17 @@ impl ConfigurationView {
                     ))
                     .is_err()
                 {
-                    debug!("Failed to send ConfigurationOutput::StartWithNewConfig");
+                    debug!("无法发送配置输出::从新配置开始");
                 }
             }
             ConfigurationInput::Back => {
                 if sender.output(ConfigurationOutput::Back).is_err() {
-                    debug!("Failed to send ConfigurationOutput::Back");
+                    debug!("无法发送配置输出::返回");
                 }
             }
             ConfigurationInput::Cancel => {
                 if sender.output(ConfigurationOutput::Close).is_err() {
-                    debug!("Failed to send ConfigurationOutput::Close");
+                    debug!("无法发送配置输出::关闭");
                 }
             }
             ConfigurationInput::Save => {
@@ -592,7 +588,7 @@ impl ConfigurationView {
                     .output(ConfigurationOutput::ConfigUpdate(self.create_raw_config()))
                     .is_err()
                 {
-                    debug!("Failed to send ConfigurationOutput::ConfigUpdate");
+                    debug!("无法发送配置输出::配置更新");
                 }
             }
             ConfigurationInput::Ignore => {
