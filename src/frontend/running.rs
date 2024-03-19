@@ -125,7 +125,7 @@ impl Component for RunningView {
 
                                     #[watch]
                                     set_label: &format!(
-                                        "Piece cache sync {:.2}%",
+                                        "Piece 片段缓存中 {:.2}%",
                                         model.farmer_state.piece_cache_sync_progress
                                     ),
                                 },
