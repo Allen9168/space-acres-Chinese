@@ -232,7 +232,8 @@ impl RunningView {
                 {
                     self.farms.insert(
                         u8::try_from(farm_index).expect(
-                            "不支持超过 256 个绘图",
+                            "More than 256 plots are not supported, this is checked on \
+                            backend; qed",
                         ),
                         FarmWidgetInit {
                             farm,
