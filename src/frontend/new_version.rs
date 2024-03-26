@@ -43,10 +43,10 @@ impl Component for NewVersion {
             remove_css_class: "text-button",
             #[watch]
             set_label: &format!(
-                "Version {} available 🎉",
+                "可用版本 {} 🎉",
                 model.new_version.as_ref().map(Version::to_string).unwrap_or_default()
             ),
-            set_tooltip: "Open releases page",
+            set_tooltip: "打开发布页面",
             set_uri: &{
                 let repository = env!("CARGO_PKG_REPOSITORY");
 
@@ -98,7 +98,7 @@ impl NewVersion {
         let url = env!("CARGO_PKG_REPOSITORY");
 
         if !url.starts_with("https://github.com") {
-            warn!(%url, "Unexpected repository URL, not checking for new version");
+            warn!(%url, "意外的存储库 URL，不检查新版本");
             return;
         }
         // Turn:
@@ -112,7 +112,7 @@ impl NewVersion {
         let current_version = match Version::parse(current_version) {
             Ok(current_version) => current_version,
             Err(error) => {
-                warn!(%error, %current_version, "Invalid version in Cargo.toml");
+                warn!(%error, %current_version, "Cargo.toml中的版本无效");
                 return;
             }
         };
@@ -135,7 +135,7 @@ impl NewVersion {
                     let tag_name = match response {
                         Ok(latest_release) => latest_release.tag_name,
                         Err(error) => {
-                            warn!(%error, %url, "Failed to check new release");
+                            warn!(%error, %url, "检查新版本失败");
                             tokio::time::sleep(NEW_VERSION_CHECK_RETRY_INTERVAL).await;
                             continue;
                         }
@@ -144,7 +144,7 @@ impl NewVersion {
                     let new_version = match Version::parse(&tag_name) {
                         Ok(new_version) => new_version,
                         Err(error) => {
-                            debug!(%error, %tag_name, "Failed to parse new version");
+                            debug!(%error, %tag_name, "无法解析新版本");
                             tokio::time::sleep(NEW_VERSION_CHECK_RETRY_INTERVAL).await;
                             continue;
                         }

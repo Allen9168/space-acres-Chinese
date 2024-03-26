@@ -61,7 +61,7 @@ impl FactoryComponent for FarmWidget {
                     add_css_class: "heading",
                     set_halign: gtk::Align::Start,
                     #[watch]
-                    set_label: &format!("Path to farm {} and its size", self.index.current_index()),
+                    set_label: &format!("农场 {} 的路径及其大小", self.index.current_index()),
                 },
 
                 gtk::Box {
@@ -91,18 +91,18 @@ impl FactoryComponent for FarmWidget {
                             #[watch]
                             set_text: self.path.display().to_string().as_str(),
                             set_tooltip_markup: Some(
-                                "Absolute path where farm files will be stored, any \
-                                SSD works, high endurance not necessary"
+                                "存储农场文件的绝对路径 \
+                                任何SSD均可，无需高耐用性"
                             ),
                         },
 
                         gtk::Button {
                             connect_clicked[sender, index] => move |_| {
                                 if sender.output(FarmWidgetOutput::OpenDirectory(index.clone())).is_err() {
-                                    warn!("Can't send open directory output");
+                                    warn!("无法发送打开目录输出");
                                 }
                             },
-                            set_label: "Select",
+                            set_label: "选择",
                         },
                     },
 
@@ -114,7 +114,7 @@ impl FactoryComponent for FarmWidget {
                             sender.input(FarmWidgetInput::FarmSizeChanged(entry.text().into()));
                         },
                         set_placeholder_text: Some(
-                            "4T, 2.5TB, 500GiB, etc.",
+                            "大小:200Gib, 或者2Tib等等",
                         ),
                         set_primary_icon_name: Some(icon_name::SIZE_HORIZONTALLY),
                         set_primary_icon_activatable: false,
@@ -126,19 +126,19 @@ impl FactoryComponent for FarmWidget {
                         #[track = "self.size.unknown()"]
                         set_text: self.size.as_str(),
                         set_tooltip_markup: Some(
-                            "Size of the farm in whichever units you prefer, any \
-                            amount of space above 2 GB works"
+                            "农场的大小 \
+                            最少需要2Gib空间"
                         ),
                     },
 
                     gtk::Button {
                         connect_clicked[sender, index] => move |_| {
                             if sender.output(FarmWidgetOutput::Delete(index.clone())).is_err() {
-                                warn!("Can't send delete output");
+                                warn!("无法发送删除输出");
                             }
                         },
                         set_icon_name: icon_name::CROSS,
-                        set_tooltip: "Delete this farm",
+                        set_tooltip: "删除该农场",
                     },
                 },
             },
@@ -179,7 +179,7 @@ impl FactoryComponent for FarmWidget {
             // Send notification up that validity was updated, such that parent view can re-render
             // view if necessary
             if sender.output(FarmWidgetOutput::ValidityUpdate).is_err() {
-                warn!("Can't send validity update output");
+                warn!("无法发送有效性更新输出");
             }
         }
     }
