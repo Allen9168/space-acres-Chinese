@@ -1,4 +1,4 @@
-use crate::backend::config::Farm;
+﻿use crate::backend::config::Farm;
 use gtk::prelude::*;
 use relm4::prelude::*;
 use relm4_icons::icon_name;
@@ -135,7 +135,7 @@ impl FactoryComponent for FarmWidget {
                     connect_clicked => FarmWidgetInput::OpenFarmFolder,
                     set_halign: gtk::Align::Start,
                     set_has_frame: false,
-                    set_tooltip: "Click to open in file manager",
+                    set_tooltip: "点击在文件管理器中打开",
 
                     gtk::Label {
                         #[watch]
@@ -169,7 +169,7 @@ impl FactoryComponent for FarmWidget {
                                 set_spacing: 5,
                                 #[watch]
                                 set_tooltip: &format!(
-                                    "Auditing performance: average time {:.2}s, time limit {:.2}s",
+                                    "性能统计：平均时间 {:.2}秒，时间限制 {:.2}秒",
                                     self.auditing_time.get_average().as_secs_f32(),
                                     MAX_AUDITING_TIME.as_secs_f32()
                                 ),
@@ -197,7 +197,7 @@ impl FactoryComponent for FarmWidget {
                                 set_spacing: 5,
                                 #[watch]
                                 set_tooltip: &format!(
-                                    "Proving performance: average time {:.2}s, time limit {:.2}s",
+                                    "性能统计：平均时间 {:.2}秒，时间限制 {:.2}秒",
                                     self.proving_time.get_average().as_secs_f32(),
                                     BLOCK_AUTHORING_DELAY.as_secs_f32()
                                 ),
@@ -229,7 +229,7 @@ impl FactoryComponent for FarmWidget {
                                         .map(|error| error.to_string())
                                         .unwrap_or_default();
 
-                                    format!("Non-fatal farming error happened and was recovered, see logs for more details: {last_error}")
+                                    format!("发生非致命农业错误并已恢复，请参阅日志了解更多详细信息：{last_error}")
                                 },
                                 set_visible: self.non_fatal_farming_error.is_some(),
                             },
@@ -255,9 +255,9 @@ impl FactoryComponent for FarmWidget {
                     gtk::Box {
                         set_spacing: 5,
                         set_tooltip: if self.farm_during_initial_plotting {
-                            "Farming runs in parallel to plotting on CPUs with more than 8 logical cores"
+                            "同时绘图+耕种在具有 8 个以上逻辑核心的 CPU 上自动运行"
                         } else {
-                            "Farming starts after initial plotting is complete on CPUs with 8 or less logical cores"
+                            "在 8 个或更少逻辑核心的 CPU 上完成初始绘图后开始耕作"
                         },
 
                         gtk::Label {
@@ -279,17 +279,17 @@ impl FactoryComponent for FarmWidget {
                                     PlottingKind::Initial => {
                                         let initial_plotting = if self.plotting_paused {
                                             if self.encoding_sectors > 0 {
-                                                "Pausing initial plotting"
+                                                "正在暂停初始绘图"
                                             } else {
-                                                "Paused initial plotting"
+                                                "暂停初始绘图"
                                             }
                                         } else {
-                                            "Initial plotting"
+                                            "初始绘图"
                                         };
                                         let farming = if self.is_node_synced && self.farm_during_initial_plotting {
-                                            "farming"
+                                            "正在耕种"
                                         } else {
-                                            "not farming"
+                                            "未耕种"
                                         };
                                         format!(
                                             "{} {:.2}%{}, {}",
@@ -302,17 +302,17 @@ impl FactoryComponent for FarmWidget {
                                     PlottingKind::Replotting => {
                                         let replotting = if self.plotting_paused {
                                             if self.encoding_sectors > 0 {
-                                                "Pausing replotting"
+                                                "正在暂停重新绘制"
                                             } else {
-                                                "Paused replotting"
+                                                "暂停重新绘制"
                                             }
                                         } else {
-                                            "Replotting"
+                                            "重新绘制"
                                         };
                                         let farming = if self.is_node_synced {
-                                            "farming"
+                                            "农业"
                                         } else {
-                                            "not farming"
+                                            "没有进行农业"
                                         };
                                         format!(
                                             "{} {:.2}%{}, {}",
@@ -342,7 +342,7 @@ impl FactoryComponent for FarmWidget {
                         set_label: if self.is_node_synced {
                             "Farming"
                         } else {
-                            "Waiting for node to sync"
+                            "等待节点同步"
                         },
                     }
                 },
@@ -362,7 +362,7 @@ impl FactoryComponent for FarmWidget {
         for sector_index in 0..init.total_sectors {
             let sector = gtk::Box::builder()
                 .css_name("farm-sector")
-                .tooltip_text(format!("Sector {sector_index}"))
+                .tooltip_text(format!("扇区 {sector_index}"))
                 .build();
             if sector_index < init.plotted_total_sectors {
                 sector.add_css_class("plotted")
@@ -531,25 +531,21 @@ impl FarmWidget {
 
     fn update_sector_tooltip(sector: &gtk::Box, sector_index: SectorIndex) {
         if sector.has_css_class(SectorState::Downloading.css_class()) {
-            sector.set_tooltip_text(Some(&format!("Sector {sector_index}: downloading")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在下载")));
         } else if sector.has_css_class(SectorState::Encoding.css_class()) {
-            sector.set_tooltip_text(Some(&format!("Sector {sector_index}: encoding")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在编码")));
         } else if sector.has_css_class(SectorState::Writing.css_class()) {
-            sector.set_tooltip_text(Some(&format!("Sector {sector_index}: writing")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 正在写入")));
         } else if sector.has_css_class(SectorState::Expired.css_class()) {
-            sector.set_tooltip_text(Some(&format!(
-                "Sector {sector_index}: expired, waiting to be replotted"
-            )));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 已过期，等待重新绘图")));
         } else if sector.has_css_class(SectorState::AboutToExpire.css_class()) {
             sector.set_tooltip_text(Some(&format!(
-                "Sector {sector_index}: about to expire, waiting to be replotted"
+                "扇区 {sector_index}: 即将过期，等待重新绘图"
             )));
         } else if sector.has_css_class(SectorState::Plotted.css_class()) {
-            sector.set_tooltip_text(Some(&format!("Sector {sector_index}: up to date")));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 已更新")));
         } else {
-            sector.set_tooltip_text(Some(&format!(
-                "Sector {sector_index}: waiting to be plotted"
-            )));
+            sector.set_tooltip_text(Some(&format!("扇区 {sector_index}: 等待绘图")));
         }
     }
 }

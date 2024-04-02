@@ -1,4 +1,4 @@
-mod farm;
+﻿mod farm;
 mod node;
 
 use crate::backend::config::RawConfig;
@@ -87,21 +87,21 @@ impl Component for RunningView {
                     gtk::Label {
                         add_css_class: "heading",
                         set_halign: gtk::Align::Start,
-                        set_label: "Farmer",
+                        set_label: "农场",
                     },
                     gtk::Box {
                         gtk::ToggleButton {
                             connect_clicked => RunningInput::ToggleFarmDetails,
                             set_has_frame: false,
                             set_icon_name: icon_name::GRID_FILLED,
-                            set_tooltip: "Expand details about each farm",
+                            set_tooltip: "展开有关每个农场的详细信息",
                         },
                         gtk::ToggleButton {
                             connect_clicked => RunningInput::TogglePausePlotting,
                             set_active: model.plotting_paused,
                             set_has_frame: false,
                             set_icon_name: icon_name::PAUSE,
-                            set_tooltip: "Pause plotting/replotting, note that currently encoding sectors will not be interrupted",
+                            set_tooltip: "暂停绘图/重新绘图，注意当前编码扇区不会被中断",
                         },
                     },
                     gtk::Box {
@@ -110,7 +110,7 @@ impl Component for RunningView {
 
                         gtk::LinkButton {
                             remove_css_class: "link",
-                            set_tooltip: "Total account balance and coins farmed since application started, click to see details in Astral",
+                            set_tooltip: "总账户余额及自应用启动以来的挖矿收益，点击查看Astral中的详情",
                             #[watch]
                             set_uri: &model.farmer_state.reward_address_url,
                             set_use_underline: false,
